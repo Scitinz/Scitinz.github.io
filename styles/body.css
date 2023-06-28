@@ -1,0 +1,13 @@
+body {
+    background-color: black;
+    margin: auto;
+    font-family: 'Verdana', sans-serif;
+    color: white;
+}
+
+#backgroundCanvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
