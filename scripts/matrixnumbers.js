@@ -8,7 +8,6 @@ const width = (canvas.width = window.innerWidth);
 const height = (canvas.height = window.innerHeight);
 
 const frameRate = 60;
-const frameInterval = 1000/frameRate;
 
 //Function to pick a random number in the given range
 function random(min, max) {
@@ -102,8 +101,6 @@ while (faders.length < 30){
     faders.push(fader);
 }
 
-var then, now, elapsed;
-
 //The main animation loop
 function loop(){
     //Draw a black background
@@ -119,7 +116,5 @@ function loop(){
     //Rerun loop
     requestAnimationFrame(loop);
 }
-
-then = Date.now();
 
 loop();
