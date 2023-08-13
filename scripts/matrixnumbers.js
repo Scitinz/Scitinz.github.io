@@ -4,9 +4,11 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
+//Get window height and width and set as canvas height/width
 const width = (canvas.width = window.innerWidth);
 const height = (canvas.height = window.innerHeight);
 
+//Assumed framerate for character updates
 const frameRate = 60;
 
 //Function to pick a random number in the given range
@@ -49,28 +51,35 @@ class Fader{
 
     //Draw the current fader
     draw() {
+        //Colours that change from character to character
         let tempColor = this.color;
         let tempDrawY = this.drawY;
+        //For every character
         for (let i = 0; i < this.length; i++) {
+            //Don't draw the character if it is off screen
+            if (tempDrawY >= height || tempDrawY <= 0){
+                continue;
+            }
+            //Draw it
             ctx.beginPath();
             ctx.fillStyle = tempColor;
             ctx.font = this.height.toString() + "px sans-serif";
             ctx.fillText(this.chars[i], this.x, tempDrawY);
+            //Calculate next characters position
             tempDrawY = tempDrawY + this.height + 2;
-            if (tempDrawY >= height || tempDrawY <= 0){
-                continue;
-            }
+            //Calculate its color based on the length of the fader
             tempColor = `rgb(${0},${(255/this.length)*(this.length - i - 1)},${0})`;
         }
     }
 
     //Update the fader position
     update() {
+        //If the whole fader is outside the screen, reset it
         if (this.y + (this.length * (this.height + 2)) <= 0){
             this.y = height - this.height;
             this.x = random(0, width);
         }
-
+        //Update positions
         this.y = this.y - this.velY;
         this.drawY = Math.floor(this.y/this.height) * this.height;
         this.counter = (this.counter + 1) % frameRate;
