@@ -56,10 +56,6 @@ class Fader{
         let tempDrawY = this.drawY;
         //For every character
         for (let i = 0; i < this.length; i++) {
-            //Don't draw the character if it is off screen
-            if (tempDrawY >= height || tempDrawY <= 0){
-                continue;
-            }
             //Draw it
             ctx.beginPath();
             ctx.fillStyle = tempColor;
